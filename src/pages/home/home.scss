@@ -1,3 +1,14 @@
-page-home {
-
+.presentation {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    h1 {
+        font-size: 40px;
+        margin: 0px 10px;
+    }
+    img {
+        border-radius: 170px;
+        height: 240px;
+    }
 }

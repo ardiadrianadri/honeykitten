@@ -1,14 +1,25 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <div class="presentation">
+      <img src="assets/images/FancyCat.jpg" />
+      <h1>Honey Kitties</h1>
+  </div>
+  <ion-list>
+
+    <ion-item>
+      <ion-label>Username</ion-label>
+      <ion-input type="text" value=""></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="password" value=""></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <div padding class="login_area">
+    <button ion-button color="primary" block>Log in</button>
+    <button ion-button color="primary" outline block (click)="navigateSignIn()">Sign In</button>
+  </div>
+
 </ion-content>
