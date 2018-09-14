@@ -1,8 +1,57 @@
 <ion-header>
-    <ion-navbar>
-      <ion-title>Sign in form</ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-title>Sign in form</ion-title>
+  </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <h1>Form for sign in</h1>
+  <ion-card *ngIf="showErrors">
+      <ion-card-header>
+        Validation errors
+      </ion-card-header>
+      <ol>
+        <li *ngFor="let error of errors">
+          {{errorsMsg[error]}}
+        </li>
+      </ol>
+  </ion-card>
+  <form [formGroup]="singupForm" (submit)="submit()">
+    <ion-list>
+
+      <ion-item>
+        <ion-label [ngClass]="{'error': errorsMsg.name && name.invalid}">Name</ion-label>
+        <ion-input formControlName="name" type="text" value="" (ionBlur)="checkErrors('name')"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label [ngClass]="{'error': errorsMsg.surname && surname.invalid}">Surname</ion-label>
+        <ion-input formControlName="surname" type="text" value="" (ionBlur)="checkErrors('surname')"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label [ngClass]="{'error': errorsMsg.email && email.invalid}">Email</ion-label>
+        <ion-input formControlName="email" type="text" value="" (ionBlur)="checkErrors('email')"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label [ngClass]="{'error': errorsMsg.username && username.invalid}">User name</ion-label>
+        <ion-input formControlName="username" type="text" value="" (ionBlur)="checkErrors('username')"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label [ngClass]="{'error': errorsMsg.password && password.invalid}">Password</ion-label>
+        <ion-input formControlName="password" type="password" value="" (ionBlur)="checkErrors('password')"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label [ngClass]="{'error': errorsMsg.confirmation && confirmation.invalid}">Confirm password</ion-label>
+        <ion-input formControlName="confirmation" type="password" value="" (ionBlur)="checkErrors('confirmation')"></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <div padding class="submit_buttons">
+      <button type="submit" [disabled]="singupForm.invalid" ion-button color="primary" block>Accept</button>
+      <button ion-button color="primary" outline block (click)="clean()">Reset</button>
+    </div>
+  </form>
 </ion-content>
