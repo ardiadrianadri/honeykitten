@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, ValidationErrors, AbstractControl } from '@angular/forms';
+import { NavController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
@@ -29,15 +30,16 @@ export class SignInPage {
 
     constructor(
         private _fb: FormBuilder,
-        private _camera: Camera
+        private _camera: Camera,
+        private _nav: NavController
     ) {
         this.singupForm = this._fb.group({
             name: ['', Validators.required],
             surname: ['', Validators.required],
             email: ['', Validators.compose([Validators.email, Validators.required])],
             username: ['', Validators.required],
-            password: ['', Validators.required],
-            confirmation: ['', this._passwordValidation]
+            password: ['', Validators.compose([Validators.required, this._passwordValidation])],
+            confirmation: ['', Validators.compose([this._passwordValidation, Validators.required])]
         });
     }
 
@@ -50,19 +52,18 @@ export class SignInPage {
             pwd = control.parent.get('password').value;
             confir = control.parent.get('confirmation').value;
 
-            result = pwd && pwd!==confir ? {'passwordNotMatch': true} : null;
+            result = pwd && confir && pwd!==confir ? {'passwordNotMatch': true} : null;
         }
 
         return result;
    }
 
     public submit() {
-        console.log(this.singupForm);
+        this._nav.pop();
     }
 
     public clean() {
-        console.log(this.singupForm);
-        console.log(this.errorsMsg);
+        this.singupForm.reset();
     }
 
     public checkErrors (key: string) {
