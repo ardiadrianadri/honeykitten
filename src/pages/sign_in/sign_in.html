@@ -14,9 +14,13 @@
         </li>
       </ol>
   </ion-card>
+  <div class="signin-picture">
+      <ion-icon name="camera" *ngIf="!image"></ion-icon>
+      <img class="user-picture" src="{{image}}" *ngIf="image" />
+      <button ion-button color="primary" (click)="takePicture()" id="picture-signin">Take a picture</button>
+  </div>
   <form [formGroup]="singupForm" (submit)="submit()">
     <ion-list>
-
       <ion-item>
         <ion-label [ngClass]="{'error': errorsMsg.name && name.invalid}">Name</ion-label>
         <ion-input formControlName="name" type="text" value="" (ionBlur)="checkErrors('name')"></ion-input>

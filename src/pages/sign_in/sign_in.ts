@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, ValidationErrors, AbstractControl } from '@angular/forms';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
     selector: 'sign-in',
@@ -9,6 +10,7 @@ export class SignInPage {
 
     public singupForm: FormGroup;
     public errorsMsg: {[key: string]: string } = {}
+    public image = null;
 
     public get name() { return this.singupForm.get('name'); }
     public get surname() { return this.singupForm.get('surname'); }
@@ -19,7 +21,16 @@ export class SignInPage {
     public get showErrors() {return Object.keys(this.errorsMsg).length > 0}
     public get errors() {return Object.keys(this.errorsMsg); }
 
-    constructor(private _fb: FormBuilder) {
+    private _options: CameraOptions = {
+        destinationType: this._camera.DestinationType.DATA_URL,
+        encodingType: this._camera.EncodingType.JPEG,
+        mediaType: this._camera.MediaType.PICTURE
+    }
+
+    constructor(
+        private _fb: FormBuilder,
+        private _camera: Camera
+    ) {
         this.singupForm = this._fb.group({
             name: ['', Validators.required],
             surname: ['', Validators.required],
@@ -73,5 +84,13 @@ export class SignInPage {
         } else {
             delete this.errorsMsg[key];
         }
+    }
+
+    public takePicture() {
+        this._camera.getPicture(this._options).then((image: any)=> {
+            this.image ='data:image/jpeg;base64,' + image;
+        },(err: any) => {
+            throw new Error(err);
+        });
     }
 }

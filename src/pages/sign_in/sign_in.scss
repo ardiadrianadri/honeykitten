@@ -5,4 +5,21 @@ sign-in {
     ion-label.label.label-ios.error {
         color: #f53d3d;
     }
+
+    div.signin-picture {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: 0px 10px 10px;
+        img {
+            width: 100px;
+        }
+        ion-icon {
+            font-size: 95px;
+        }
+        #picture-signin {
+            width: 70%;
+            height: 45px;
+        }
+    }
 }
