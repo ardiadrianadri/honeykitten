@@ -7,19 +7,24 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Camera } from '@ionic-native/camera';
 
 import { MyApp } from './app.component';
+import { ComponentsModule } from '../components';
+import { CoreModule } from '../core';
 import {
   HomePage,
-  SignInPage
+  SignInPage,
+  ListCatsPage
 } from '../pages';
 
-export const pages = [ HomePage, SignInPage, MyApp ];
+export const pages = [ ListCatsPage, HomePage, SignInPage, MyApp ];
 
 @NgModule({
   declarations: [...pages],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    ComponentsModule,
+    CoreModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [...pages],

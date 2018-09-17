@@ -1,0 +1,19 @@
+<div class="card" *ngIf="catData">
+    <div class="header">
+        <div class="title">{{catData.name}}</div>
+    </div>
+    <div class="body">
+        <div class="picture">
+            <img src="{{catData.picture}}" />
+        </div>
+        <div class="details">
+            <div class="description">
+                {{catData.description}}
+            </div>
+            <div class="valoration">
+                <div class="fur">Fur: {{catData.fur}}/10</div>
+                <div class="purr">Purr: {{catData.purr}}/10</div>
+            </div>
+        </div>
+    </div>
+</div>

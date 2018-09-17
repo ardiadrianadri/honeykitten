@@ -1,0 +1,44 @@
+[
+    {
+        "name":"Batman",
+        "description": "The dark knith feels the terrible loneliness of the fight agains crime. Do you want to be his Robin?",
+        "fur": 5,
+        "purr": 2,
+        "picture": "/assets/images/batmancat.jpg"
+    },
+    {
+        "name": "Joker",
+        "description": "Maybe you are thinking that this cat is a bit phicopat homicide but the real true is that he only wants to have fun with you. Remove your prejudices and go to his place",
+        "fur": 7,
+        "purr": 9,
+        "picture": "/assets/images/jokercat.jpg"
+    },
+    {
+        "name": "Judith Catindlin",
+        "description": "You know that it is always good to have a judge on your side so this is a great opportunity for you. Give her a bit of warm and, maybe, she could help you with some traffic penalty",
+        "fur": 2,
+        "purr": 3,
+        "picture": "/assets/images/judgecat.jpg"
+    },
+    {
+        "name": "Jackie Caton",
+        "description": "If you think that no one can heal you hearth is because you have not meet Jackie. She is the best nurse in all catown",
+        "fur": 7,
+        "purr": 7,
+        "picture": "nurserycat.jpg"
+    },
+    {
+        "name": "Michel Catott",
+        "description": "This a really urgencency. This cat is too addicted to work. He needs to feel the warm of the human touch to know that there are better experience out of the desk",
+        "fur": 5,
+        "purr": 5,
+        "picture": "/assets/images/officecat.jpg"
+    },
+    {
+        "name": "Donal Catrump",
+        "description":"This is the most powerful cat in the free world. The measure of his ambition is only comparable at the volumen of his fur. Share a bit of love with him is not an option, it is a service at your country",
+        "fur": 10,
+        "purr": 0,
+        "picture":"/assets/images/trumpcat.jpg"
+    }
+]

@@ -1,0 +1,51 @@
+card-cat {
+    .card {
+        border: solid black 3px;
+        border-radius: 12px;
+        .header {
+            border-bottom: solid black 3px;
+            .title {
+                text-align: center;
+                font-weight: bold;
+                font-size: 40px;
+            }
+        }
+        .body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            .picture{
+                padding: 10px;
+                img {
+                    width: 100%;
+                }
+            }
+            .details {
+                border-top: solid  black 3px;
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: center;
+                align-items: center;
+                font-size: 20px;
+                .description {
+                    padding: 5px;
+                    width: 70%;
+                    border-right: solid black 3px;
+                }
+                .valoration {
+                    width: 30%;
+                    display: flex;
+                    flex-direction: column;
+                    .fur {
+                        padding: 5px;
+                        border-bottom: solid black 3px;
+                    }
+                    .purr {
+                        padding: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
