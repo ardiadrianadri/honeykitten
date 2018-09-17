@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { CatData } from '../../common';
 
@@ -6,11 +6,14 @@ import { CatData } from '../../common';
     selector: 'card-cat',
     templateUrl: 'card.html'
 })
-export class CardComponent implements OnChanges {
+export class CardComponent {
     @Input()
     public catData: CatData;
 
-    ngOnChanges() {
-        console.log(this.catData);
+    @Output()
+    public changeCatEvent: EventEmitter<any> = new EventEmitter<any>();
+
+    public changeCat (event: any) {
+        this.changeCatEvent.emit(event);
     }
 }

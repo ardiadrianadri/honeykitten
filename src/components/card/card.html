@@ -1,4 +1,4 @@
-<div class="card" *ngIf="catData">
+<div class="card" *ngIf="catData" (swipe)="changeCat($event)">
     <div class="header">
         <div class="title">{{catData.name}}</div>
     </div>

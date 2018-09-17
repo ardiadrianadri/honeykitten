@@ -4,5 +4,5 @@
     </ion-navbar>
   </ion-header>
   <ion-content padding>
-      <card-cat [catData]="catInfo$ | async"></card-cat>
+      <card-cat [catData]="catInfo$ | async" (changeCatEvent)="changeCat($event)"></card-cat>
   </ion-content>
