@@ -14,6 +14,8 @@ export class HomePage {
   public user = '';
   public pwd = '';
 
+  public errors: string[] = null;
+
   constructor(
     public _navCtrl: NavController,
     public _userApi: UserApi
@@ -24,15 +26,19 @@ export class HomePage {
   }
 
   public navigateLogin() {
+    this.errors = null;
+  
     this._userApi.searchUser(this.user)
     .subscribe(
       (user: UserData) => {
         if ((user) && (this.pwd === user.password)) {
-          this._navCtrl.push(ListCatsPage, user);
+          this._navCtrl.push(ListCatsPage);
+        } else {
+          this.errors = ['Wrong user or password']
         }
       },
       (error: Response) => {
-        console.log(error);
+        this.errors = [error.message];
       }
     )
   }
