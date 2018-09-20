@@ -2,11 +2,12 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
-import { CatService } from './cat-api/cat-api';
+import { CatService } from './cat-api';
+import { UserApi } from './user-api';
 
 @NgModule({
     imports: [ CommonModule, HttpClientModule ],
-    providers: [ CatService ],
+    providers: [ CatService, UserApi ],
 })
 export class CoreModule {
     constructor (@Optional() @SkipSelf() parent: CoreModule) {

@@ -5,6 +5,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Camera } from '@ionic-native/camera';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { ComponentsModule } from '../components';
@@ -23,6 +24,10 @@ export const pages = [ ListCatsPage, HomePage, SignInPage, MyApp ];
     BrowserModule,
     ReactiveFormsModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot({
+      name: '__users',
+      driverOrder: ['indexeddb', 'sqlite', 'websql']
+    }),
     ComponentsModule,
     CoreModule
   ],

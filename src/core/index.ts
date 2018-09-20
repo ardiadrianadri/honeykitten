@@ -1,2 +1,3 @@
-export * from './cat-api/cat-api';
+export * from './cat-api';
 export * from './core';
+export * from './user-api';

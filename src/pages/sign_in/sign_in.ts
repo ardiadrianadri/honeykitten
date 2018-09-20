@@ -3,6 +3,11 @@ import { Validators, FormBuilder, FormGroup, ValidationErrors, AbstractControl }
 import { NavController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
+import { Subscription } from 'rxjs';
+
+import { UserApi } from '../../core/user-api';
+import { Response } from '../../common';
+
 @Component({
     selector: 'sign-in',
     templateUrl: 'sign_in.html'
@@ -28,10 +33,13 @@ export class SignInPage {
         mediaType: this._camera.MediaType.PICTURE
     }
 
+    private _saveUserSubscription: Subscription; 
+
     constructor(
         private _fb: FormBuilder,
         private _camera: Camera,
-        private _nav: NavController
+        private _nav: NavController,
+        private _userApi: UserApi
     ) {
         this.singupForm = this._fb.group({
             name: ['', Validators.required],
@@ -41,6 +49,12 @@ export class SignInPage {
             password: ['', Validators.compose([Validators.required, this._passwordValidation])],
             confirmation: ['', Validators.compose([this._passwordValidation, Validators.required])]
         });
+    }
+
+    ionViewWillLeave() {
+        if (this._saveUserSubscription) {
+            this._saveUserSubscription.unsubscribe();
+        }
     }
 
    private _passwordValidation(control: AbstractControl): ValidationErrors | null {
@@ -59,7 +73,16 @@ export class SignInPage {
    }
 
     public submit() {
-        this._nav.pop();
+        this._saveUserSubscription = this._userApi.createUser(this.singupForm.value)
+        .subscribe(()=> {
+            if (this.errorsMsg.saveUser) {
+                delete this.errorsMsg.saveUser;
+            }
+
+            this._nav.pop();
+        }, (error: Response) => {
+            this.errorsMsg.saveUser = error.message;
+        });
     }
 
     public clean() {
