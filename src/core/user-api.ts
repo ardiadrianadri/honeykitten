@@ -9,25 +9,24 @@ import { UserData, Response } from '../common';
 @Injectable()
 export class UserApi {
 
+    private static SESSION = 'session';
+
     constructor (private _storage: Storage) {}
 
     public createUser(user: UserData): Observable<Response> {
         return Observable.fromPromise(this._storage.set(user.username, user))
         .pipe(
             map(() => {
-                const response: Response = {
+                return {
                     success: true,
                     message: `The user ${user.username} has been created`
-                }
-                return response;
+                };
             }),
             catchError((error: any) => {
-                const response: Response = {
+                return Observable.throw({
                     success: false,
                     message: error.message || error
-                }
-
-                return Observable.throw(response);
+                });
             })
         );
     }
@@ -36,12 +35,46 @@ export class UserApi {
         return Observable.fromPromise(this._storage.get(username))
         .pipe(
             catchError((error: any) => {
-                let response: Response = {
+                return Observable.throw({
                     success: false,
                     message: `It was not possible to retrieve the user ${username}: ${error.message || error}`
-                }
+                });
+            })
+        );
+    }
 
-                return Observable.throw(response);
+    public startSession(user: UserData): Observable<Response> {
+        return Observable.fromPromise(this._storage.set(UserApi.SESSION, user))
+        .pipe(
+            map(() => {
+                return {
+                    success: true,
+                    message: `Session started for user ${user.username}`
+                }
+            }),
+            catchError((error: any) => {
+                return Observable.throw({
+                    success: false,
+                    message: error.message || error
+                });
+            })
+        );
+    }
+
+    public closeSession(): Observable<Response> {
+        return Observable.fromPromise(this._storage.remove(UserApi.SESSION))
+        .pipe(
+            map(() => {
+                return {
+                    success: true,
+                    message: 'Session closed'
+                }
+            }),
+            catchError ((error: any) => {
+                return Observable.throw({
+                    success: false,
+                    message: error.message || error
+                })
             })
         );
     }
