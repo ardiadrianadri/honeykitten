@@ -1,0 +1,10 @@
+<ion-card *ngIf="errors" class="error-cards">
+    <ion-card-header>
+        <ion-icon name="warning"></ion-icon> <span>Warning !!!</span>
+    </ion-card-header>
+    <ol>
+      <li *ngFor="let error of errors">
+        {{error}}
+      </li>
+    </ol>
+</ion-card>

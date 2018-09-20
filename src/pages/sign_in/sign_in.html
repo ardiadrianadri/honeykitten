@@ -4,16 +4,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-card *ngIf="showErrors">
-      <ion-card-header>
-        Validation errors
-      </ion-card-header>
-      <ol>
-        <li *ngFor="let error of errors">
-          {{errorsMsg[error]}}
-        </li>
-      </ol>
-  </ion-card>
+  <errors-display [errors]="errors"></errors-display>
   <div class="signin-picture">
       <ion-icon name="camera" *ngIf="!image"></ion-icon>
       <img class="user-picture" src="{{image}}" *ngIf="image" />

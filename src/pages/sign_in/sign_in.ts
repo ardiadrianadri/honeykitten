@@ -3,8 +3,6 @@ import { Validators, FormBuilder, FormGroup, ValidationErrors, AbstractControl }
 import { NavController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
-import { Subscription } from 'rxjs';
-
 import { UserApi } from '../../core/user-api';
 import { Response } from '../../common';
 
@@ -25,15 +23,21 @@ export class SignInPage {
     public get password() { return this.singupForm.get('password'); }
     public get confirmation() { return this.singupForm.get('confirmation'); }
     public get showErrors() {return Object.keys(this.errorsMsg).length > 0}
-    public get errors() {return Object.keys(this.errorsMsg); }
+    public get errors() {
+        let result = [];
+
+        Object.keys(this.errorsMsg).forEach((errorKey: string) => {
+            result.push(this.errorsMsg[errorKey]);
+        });
+
+        return (result.length > 0) ? result : null; 
+    }
 
     private _options: CameraOptions = {
         destinationType: this._camera.DestinationType.DATA_URL,
         encodingType: this._camera.EncodingType.JPEG,
         mediaType: this._camera.MediaType.PICTURE
     }
-
-    private _saveUserSubscription: Subscription; 
 
     constructor(
         private _fb: FormBuilder,
@@ -49,12 +53,6 @@ export class SignInPage {
             password: ['', Validators.compose([Validators.required, this._passwordValidation])],
             confirmation: ['', Validators.compose([this._passwordValidation, Validators.required])]
         });
-    }
-
-    ionViewWillLeave() {
-        if (this._saveUserSubscription) {
-            this._saveUserSubscription.unsubscribe();
-        }
     }
 
    private _passwordValidation(control: AbstractControl): ValidationErrors | null {
@@ -73,7 +71,7 @@ export class SignInPage {
    }
 
     public submit() {
-        this._saveUserSubscription = this._userApi.createUser(this.singupForm.value)
+        this._userApi.createUser(this.singupForm.value)
         .subscribe(()=> {
             if (this.errorsMsg.saveUser) {
                 delete this.errorsMsg.saveUser;
