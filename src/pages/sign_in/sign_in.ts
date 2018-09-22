@@ -4,7 +4,7 @@ import { NavController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { UserApi } from '../../core/user-api';
-import { Response } from '../../common';
+import { Response, UserData } from '../../common';
 
 @Component({
     selector: 'sign-in',
@@ -71,7 +71,10 @@ export class SignInPage {
    }
 
     public submit() {
-        this._userApi.createUser(this.singupForm.value)
+        const user: UserData = Object.assign({}, this.singupForm.value);
+        user.photo = (this.image) ? this.image : null;
+
+        this._userApi.createUser(user)
         .subscribe(()=> {
             if (this.errorsMsg.saveUser) {
                 delete this.errorsMsg.saveUser;

@@ -1,0 +1,25 @@
+nav-menu {
+    .user-header {
+        font-size: 30px;
+
+        img {
+            height: 30px;
+            border-radius: 50px;
+        }
+
+        .user-name {
+            margin-left: 10px;
+            text-transform: uppercase;
+        }
+    }
+
+    ion-content {
+        .menu-options {
+            font-size: 20px;
+            .menu-text {
+                margin-left: 10px;
+                text-transform: capitalize;
+            }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+<ion-menu [content]="content">
+
+    <ion-header>
+        <ion-toolbar *ngIf="user" class="user-header">
+            <img src="{{user.photo}}" *ngIf="user.photo" />
+            <ion-icon name="contact" *ngIf="!user.photo"></ion-icon>
+            <span class="user-name">{{user.username}}</span>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+        <ion-list class="menu-options">
+            <span (click)="logOut()">
+                <ion-icon name="exit"></ion-icon>
+                <span class="menu-text">Logout</span>
+            </span>
+        </ion-list>
+    </ion-content>
+
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

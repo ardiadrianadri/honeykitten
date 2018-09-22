@@ -13,10 +13,11 @@ import { CoreModule } from '../core';
 import {
   HomePage,
   SignInPage,
-  ListCatsPage
+  ListCatsPage,
+  NavMenuPage
 } from '../pages';
 
-export const pages = [ ListCatsPage, HomePage, SignInPage, MyApp ];
+export const pages = [ NavMenuPage, ListCatsPage, HomePage, SignInPage, MyApp ];
 
 @NgModule({
   declarations: [...pages],

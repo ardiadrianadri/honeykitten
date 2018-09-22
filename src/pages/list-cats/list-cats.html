@@ -1,7 +1,10 @@
 <ion-header>
     <ion-navbar>
-      <ion-title>List of cats</ion-title>
-    </ion-navbar>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>List of kitties</ion-title>
+      </ion-navbar>
   </ion-header>
   <ion-content padding>
       <card-cat [catData]="catInfo$ | async" (changeCatEvent)="changeCat($event)"></card-cat>

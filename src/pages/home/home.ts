@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SignInPage } from '../sign_in/sign_in';
-import { ListCatsPage } from '../list-cats/list-cats';
+import { NavMenuPage } from '../menu-nav/menu-nav';
 import { Response, UserData } from '../../common';
 import { UserApi } from '../../core';
 
@@ -32,10 +32,13 @@ export class HomePage {
     .subscribe(
       (user: UserData) => {
         if ((user) && (this.pwd === user.password)) {
-          this._navCtrl.push(ListCatsPage);
+          this._navCtrl.push(NavMenuPage, { session: user });
         } else {
           this.errors = ['Wrong user or password']
         }
+
+        this.user = '';
+        this.pwd = '';
       },
       (error: Response) => {
         this.errors = [error.message];

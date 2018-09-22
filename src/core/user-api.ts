@@ -78,4 +78,8 @@ export class UserApi {
             })
         );
     }
+
+    public getSession(): Observable<UserData> {
+        return this.searchUser(UserApi.SESSION);
+    }
 }
